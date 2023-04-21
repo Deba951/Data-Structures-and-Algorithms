@@ -1,0 +1,6 @@
+1> How to write CLEAN CODE
+2> Recursssion
+3> Back Tracking
+4> Graph
+5> Tree
+6> Dynamic Programming

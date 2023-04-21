@@ -1,0 +1,1360 @@
+//CircularLinkedList.c
+
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct node
+{
+	int data;
+	struct node *next;
+}node;
+node *createlist(node *head, node *newnode, node *temp, int n);
+node *insert_beg(node *head, node *tail, node *temp);
+node *insert_last(node *head, node *tail, node *temp);
+node *insert_particular_pos(node *head, node *newnode, node *temp, int n, node *tail);
+node *delete_beg(node *head, node *tail, node *temp);
+node *delete_last(node *head, node *tail, node *temp);
+node *displaylist(node *head, node *temp);
+int main()
+{
+	node *head;
+	node *temp;
+	node *newnode;
+	node *tail;
+	head = NULL;
+	int n, i, choice;
+    do
+    {
+    	printf("\n *******************MAIN MENU**********************");
+    	printf("\n We are determining the first node of the circular linked list as head and the last node as the tail ");
+	    printf("\n <1> For creating the CIRCULAR LINKED LIST");
+	    printf("\n <2> For inserting a node before the head");
+	    printf("\n <3> For inserting a node at the end of the tail");
+	    printf("\n <4> For displaying the whole circular linked list ");
+	    printf("\n <5> For inserting a node at a particular position");
+	    printf("\n <6> For deleting the first node ");
+	    printf("\n <7> For deleting the last node ");
+	    printf("\n <10> For exiting from the loop ");
+	    printf("\n\n Enter your choice : ");
+	    scanf("%d", &choice);
+	    switch(choice)
+	    {
+	    	case 1 : head = createlist(head, newnode, temp, n);
+	    	         printf("\n Circular Link List created");
+	    	         break;
+	    	case 2 : head = insert_beg(head, tail, temp);     
+			         printf("\n The newnode is inserted before the head");
+					 break;
+			case 3 : head = insert_last(head, tail, temp);	
+			         printf("\n The newnode is inserted after the tail");
+					 break;	 
+			case 4 : head = displaylist(head, temp);
+			         printf("\n The whole circular linked list is displaying ");
+					 break;		   
+			case 5 : head = insert_particular_pos(head, newnode, temp, n, tail);
+			         printf("\n The newnode is inserted at the particular position ");
+					 break;	
+			case 6 : head = delete_beg(head, tail, temp);
+			         printf("\n The first node is deleted ");
+					 break; 
+			case 7 : head = delete_last(head, tail, temp);
+			         printf("\n The last node is deleted ");
+					 break; 
+			case 10: printf("\n The program is ended \n");	
+			         break;
+			default: printf("\n WRONG CHOICE \n");
+			         break;
+		}
+	}while (choice != 10);
+	return 0;
+}
+node *createlist(node *head, node *newnode, node *temp, int n)
+{
+	int i;
+	head = NULL;
+	newnode = NULL;
+	temp = NULL;
+	printf("\n Enter the number of nodes: ");
+	scanf("%d", &n);
+	for (i = 0; i < n; i ++)
+	{
+		newnode = (node *) malloc (sizeof (node));
+		printf("\n Enter the data for the node no %d : ", i + 1);
+		scanf("%d", &newnode -> data);
+		newnode -> next = NULL;
+		if (head == NULL)
+		{
+			head = temp = newnode;
+		}
+		else
+		{
+			temp -> next = newnode;
+			temp = newnode;
+		}
+	}
+	temp -> next = head;
+	return head;
+}
+
+node *insert_beg(node *head, node *tail, node *temp)
+{
+	node *newnode = NULL;
+	temp = NULL;
+	tail = NULL;
+	newnode = (node *) malloc (sizeof (node));
+	printf("\n Enter the data for the node  : ");
+	scanf("%d", &newnode -> data);
+	newnode -> next = NULL;
+	temp = head;
+	if (head == NULL)
+	{
+	    head = newnode;
+	    tail = newnode;
+	    head -> next = head;
+	}
+	else
+	{
+	    while (temp -> next != head)
+	   {
+	    	temp = temp -> next;
+	   }
+    	tail = temp;
+	    tail -> next = newnode;
+	    newnode -> next = head;
+	    head = newnode;
+	}
+	return head;
+}
+node *insert_last(node *head, node *tail, node *temp)
+{
+	node *newnode = NULL;
+	tail = NULL;
+	temp = NULL;
+	newnode = (node *) malloc (sizeof (node));
+	printf("\n Enter the data for the node  : ");
+	scanf("%d", &newnode -> data);
+	newnode -> next = NULL;
+	temp = head;
+    if (head == NULL)
+    {
+        head = newnode;
+        head -> next = head;
+    }
+    else
+    {
+        while (temp -> next != head)
+	    {
+	    	temp = temp -> next;
+	    }
+	    tail = temp;
+	    tail -> next = newnode;
+	    newnode -> next = head;
+	    tail = newnode;
+    }
+	return head;
+}
+node *insert_particular_pos(node *head, node *newnode, node *temp, int n, node *tail)
+{
+	newnode = NULL;
+	temp = NULL;
+	int pos, i;
+	newnode = (node *) malloc (sizeof (node));
+	printf("\n Enter the data for the newnode : ");
+	scanf("%d", &newnode -> data);
+	int count = 0;
+	node *t;
+	t = head;
+    if (head != NULL)
+    {
+        while (t -> next != head)
+	    {
+	       count ++;
+	       t = t -> next;
+	    }
+	    count = count + 1;
+    }
+	printf ("\n %d", count);
+	printf("\n Enter the position where you wanna insert a newnode : ");
+	scanf("%d", &pos);
+	if (pos > count + 1)
+	{
+	    printf("\n INVALID POSITION \n");
+	}
+	else
+	{
+	    if (head == NULL)
+	    {
+	        head = newnode;
+	        head -> next = head;
+	    }
+	    else
+	    {
+	        if (pos == 1)
+			{
+				head = insert_beg(head, tail, temp);
+			}
+			else
+			{
+				temp = head;
+	            for (i = 0; i < (pos - 2); i ++)
+	            {
+		            temp = temp -> next;
+	            }
+	            newnode -> next = temp -> next;
+	            temp -> next = newnode;
+			}
+	    }
+	}
+	return head;
+}
+node *delete_beg(node *head, node *tail, node *temp)
+{
+	temp = head;
+	node *p = head;
+    if (head == NULL)
+    {
+        printf("\n The linked list is empty \n");
+    }
+    else
+    {
+        while (temp -> next != head)
+	    {
+		    temp = temp -> next;
+	    }
+	    temp -> next = head -> next;
+	    head = head -> next;
+	    free(p);
+    }
+	return head;
+}
+node *delete_last(node *head, node *tail, node *temp)
+{
+	temp = head;
+	node *prev = NULL;
+    if (head == NULL)
+    {
+        printf("\n The linked lust is empty!! \n");
+    }
+    else
+    {
+        while (temp -> next != head)
+	    {
+		    prev = temp;
+		    temp = temp -> next;
+	    }
+    	prev -> next = temp -> next;
+	    free(temp);
+    }
+	return head;
+}
+node *displaylist(node *head, node *temp)
+{
+	temp = head;
+    if (head == NULL)
+    {
+    	printf("\n The CIRCULAR LINKED LIST is empty!");
+	}
+	else
+	{
+	    printf("\n The Circular Linked list is displaying: ");
+		while (temp -> next != head)
+	{
+		printf("%d -> ", temp -> data);
+		temp = temp -> next;
+	}
+	}
+	printf("%d", temp -> data);
+	return head;
+}
+
+
+
+
+
+
+
+//DOUBLY-LINKED-LIST-Insertion_at_beginning_end_and_at_anyPosition.cpp
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef struct node
+{
+    int data;
+    node *next;
+    node *prev;
+}node;
+//node *insert_beg(node *head);
+node *insert_beg(node *head)
+{
+    node *temp;
+    temp = NULL;
+    node *newnode;
+    newnode = NULL;
+    newnode = (node *)malloc(sizeof(node));
+    cout << "Enter the data" << endl;
+    cin >> newnode -> data;
+    newnode -> next = NULL;
+    newnode -> prev = NULL;
+    if (head == NULL)
+    {
+        head = newnode;
+    }
+    else
+    {
+        newnode -> next = head;
+        head -> prev = newnode;
+        head = newnode;
+    }
+    return head;
+}
+node *insert_end(node *head)
+{
+    node *temp;
+    temp = NULL;
+    node *newnode;
+    newnode = NULL;
+    newnode = (node *)malloc(sizeof(node));
+    cout << "Enter the data" << endl;
+     cin >> newnode -> data;
+    newnode -> next = NULL;
+    newnode -> prev = NULL;
+    if (head == NULL)
+    {
+        head = newnode;
+    }
+    else
+    {
+        temp = head;
+        while (temp -> next != NULL)
+        {
+            temp = temp -> next;
+        }
+        temp -> next = newnode;
+        newnode -> prev = temp;
+        temp = newnode;
+    }
+    return head;
+}
+node *insert_at_any_pos(node *head)
+{
+    node *temp;
+    temp = head;
+    int count = 0, pos;
+    while (temp != NULL)
+    {
+        count ++;
+        temp = temp -> next;
+    }
+    node *newnode;
+    newnode = NULL;
+    newnode = (node *)malloc(sizeof(node));
+    cout << "Enter the data" << endl;
+     cin >> newnode -> data;
+    newnode -> next = NULL;
+    newnode -> prev = NULL;
+    cout << "Enter the position  :: " << endl;
+    cin >> pos;
+    if (pos > count + 1)
+    {
+        cout << "Invalid position" << endl;
+    }
+    else if (pos == 1)
+    {
+        head = insert_beg(head);
+    }
+    else if (pos == count + 1)
+    {
+        head = insert_end (head);
+    }
+    else
+    {
+        temp = head;
+        for (int i = 0; i < pos - 2; i ++)
+        {
+            temp = temp -> next;
+        }
+        newnode -> next = temp -> next;
+        (temp -> next) -> prev = newnode;
+        temp -> next = newnode;
+        newnode -> prev = temp;
+    }
+    return head;
+}
+void display (node *head)
+{
+    node *temp;
+    temp = head;
+    cout << "****** Displaying the List *******" << endl;
+    while (temp != NULL)
+    {
+        cout << "\t" << temp -> data;
+        temp = temp -> next;
+    }
+    cout << endl;
+}
+int main()
+{
+    node *head;
+    head = NULL;
+    int choice = 1;
+    while (choice)
+    {
+        cout << "Enter 1 for insertion at beginning " << endl;
+        cout << "Enter 2 for insertion at end " << endl;
+        cout << "Enter 3 for insertion at any position " << endl;
+        cout << "Enter 4 for display " << endl;
+        cout << "Enter 0 to end the program " << endl;
+        cout << "\n\n Enter your choice :: " << endl;
+        cin >> choice;
+        if (choice == 1)
+        {
+            head = insert_beg (head);
+        }
+        else if (choice == 2)
+        {
+            head = insert_end (head);
+        }
+        else if (choice == 3)
+        {
+            head = insert_at_any_pos (head);
+        }
+        else if (choice == 4)
+        {
+            display(head);
+        }
+        else if (choice == 0)
+        {
+            cout << "The program is ended "<< endl;
+        }
+        else
+        {
+            cout << "Wrong Choice " << endl;
+        }
+    }
+    return 0;
+}
+
+
+
+
+
+
+//Insertion-in-Doubly_Circular_Linked_List
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+     int data;
+     struct node *next;
+     struct node *prev;
+}node;
+struct node *t = NULL;
+
+void display (node *head)
+{
+     node *temp = head;
+     if (head == NULL)
+     {
+          printf("\n The Linked List is empty!!!!");
+     }
+     else
+     {
+          printf("\n The linked list is displaying ::  ");
+          while (temp != t)
+          {
+               printf("\t %d", temp -> data);
+               temp = temp -> next;
+          }
+          printf("\t %d", temp -> data);
+     }
+}
+node *insert_at_last(node *head)
+{
+     node *p = NULL;
+     int a;
+     p = (node *)malloc(sizeof(node));
+     printf("\n Enter the data ::  ");
+     scanf("%d", &a);
+     p -> data = a;
+     p -> next = NULL;
+     p -> prev = NULL;
+     if (head == NULL)
+     {
+          head = p;
+          t = p;
+          p -> next = head;
+          t -> prev = head;
+     }
+     else
+     {
+          t -> next = p;
+          p -> prev = t;
+          t = p;
+          t -> next = head;
+          head -> prev = t;
+     }
+     return head;
+}
+node *insert_at_beginning(node *head)
+{
+     node *p = NULL;
+     int a;
+     p = (node *)malloc(sizeof(node));
+     printf("\n Enter the data ::  ");
+     scanf("%d", &a);
+     p -> data = a;
+     p -> next = NULL;
+     p -> prev = NULL;
+     if (head == NULL)
+     {
+          head = p;
+          t = p;
+          p -> next = head;
+          t -> prev = head;
+     }
+     else
+     {
+           p -> next = head;
+           head -> prev = p;
+           head = p;
+           head -> prev = t;
+           t -> next = head;
+     }
+     return head;
+     
+}
+node *create(node *head)
+{
+     int n, a;
+     printf("\n Enter the number of nodes ::  ");
+     scanf("%d", &n);
+     node *newnode = NULL;
+     //node *t;
+     //t = NULL;
+     for (int i = 0; i < n; i ++)
+     {
+          newnode = (node *)malloc(sizeof(node));
+          printf("\n Enter the data :: ");
+          scanf("%d", &a);
+          newnode -> data = a;
+          newnode -> next = NULL;
+          newnode -> prev = NULL;
+          if (head == NULL)
+          {
+                head = newnode;
+                t = head;
+                t -> next = head;
+                t -> prev = head;
+          }
+          else
+          {
+                t -> next = newnode;
+                newnode -> prev = t;
+                t = newnode;
+                t -> next = head;
+                head -> prev = t;
+          }
+     }
+     return head;
+}
+int main()
+{
+     int ch, y;
+     node *head = NULL;
+     head = create(head);
+     do
+     {
+           printf("\n Enter 1 to insert at beginning");
+           printf("\n Enter 2 to insert at last");
+           printf("\n Enter 3 to display");
+           printf("\n Enter your choice :: \n");
+           scanf("%d", &ch);
+           switch (ch)
+           {
+                case 1 : head = insert_at_beginning(head);
+                         break;
+                case 2 : head = insert_at_last(head);
+                         break;
+                case 3 : display(head);
+                         break;
+                default : printf("\n WRONG CHOICE ");                           
+           }
+           printf("\n Do you wanna coninue ???? Yes, Press -> 1 else press -> 0::  ");
+           scanf("%d", &y);
+     }while (y == 1);
+}
+
+
+
+
+
+
+
+
+
+//Insertions_and_Sorting_LinkedList.cpp
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef struct node
+{
+    int data;
+    struct node *next;
+}node;
+int display(node *head, int count)
+{
+    node *temp;
+    temp = head;
+    count = 0;
+    cout <<"***********The LINKED LIST is displaying****************" << endl;
+    while (temp != NULL)
+    {
+        cout << "\t" << temp->data;
+        count ++;
+        temp = temp -> next;
+    }
+    cout << endl;
+    cout << "The number of nodes is :: " << count << endl;
+    return count;
+}
+node *insert_beginning (node *head)
+{
+    node *newnode;
+    newnode = NULL;
+    newnode = (node *)malloc(sizeof(node));
+    cout << "Enter the data : " << endl;
+    cin >> newnode->data;
+    newnode->next = NULL;
+    if (head == NULL)
+    {
+        head = newnode;
+    }
+    else
+    {
+        newnode->next = head;
+        head = newnode;
+    }
+    return head;
+}
+node *createnode_end (node *head)
+{
+    node *newnode;
+    node *temp;
+    temp = head;
+    newnode = NULL;
+    newnode = (node *)malloc(sizeof (node));
+    cout << "Enter the data ::" << endl;
+    cin >> newnode-> data;
+    newnode->next = NULL;
+    if (head == NULL)
+    {
+        head = newnode;
+        temp = newnode;
+    }
+    else
+    {
+        while(temp -> next != NULL)
+        {
+            temp = temp -> next;
+        }
+        temp -> next = newnode;
+    }
+    return head;
+}
+node *insert_anyPosition(node *head, int count)
+{
+    //cout << count;
+    int pos;
+    node *temp;
+    node *newnode;
+    newnode = NULL;
+    newnode = (node *)malloc(sizeof(node));
+    cout << "Enter the data ::" << endl;
+    cin >> newnode -> data;
+    newnode -> next = NULL;
+    cout << "Enter the position to insert the new node ::" << endl;
+    cin >> pos;
+    temp = head;
+    if (pos > count + 1)
+    {
+        cout << "This value for position is invalid" << endl;
+    }
+    else
+    {
+        if (pos == 1)
+        {
+            head = insert_beginning(head);
+        }
+        else
+        {
+            for (int i = 1; i < pos-1; i ++)
+           {
+                temp = temp -> next;
+            }
+            newnode->next = temp -> next;
+            temp -> next = newnode;
+        }
+    }
+    return head;
+}
+node *sort_Linked_list(node *head, int count)
+{
+    node *temp1;
+    temp1 = head;
+    int min = temp1 -> data;
+    node *temp2;
+    temp2 = head;
+    node *ptr;
+    ptr = head;
+    for (int i = 0; i < count-1; i ++)
+    {
+        temp2 = temp1;
+        min = temp2 -> data;
+        ptr = temp2;
+        for (int j = i + 1; j < count; j ++)
+        {
+            temp2 = temp2 -> next;
+            if(temp2->data < min)
+            {
+                min = temp2->data;
+                ptr = temp2;
+            }
+        }
+        swap(temp1->data, ptr->data);
+        temp1 = temp1 -> next;
+    }
+    return head;
+}
+int main()
+{
+    int choice = 1;
+    int count = 0;
+    node *head;
+    head = NULL;
+    while(choice)
+    {
+        cout << "Enter 1 to add node to the linked list at the end position"<< endl;
+        cout << "Enter 3 to add node at the beginning" << endl;
+        cout << "Enter 4 to add node at any position" << endl;
+        cout << "Enter 2 to sort the linked list" << endl;
+        cout << "Enter 0 to end the program" << endl;
+        cout << "Enter your choice ::" << endl;
+        cin >> choice;
+        if (choice == 1)
+        {
+             head = createnode_end(head);
+             count = display(head, count);
+        }
+        else if (choice == 2)
+        {
+            head = sort_Linked_list(head, count);
+            count = display(head, count);
+        }
+        else if (choice == 3)
+        {
+            head = insert_beginning(head);
+            count = display(head, count);
+        }
+        else if (choice == 4)
+        {
+            head = insert_anyPosition(head, count);
+            count = display(head, count);
+        }
+        else if (choice == 0)
+        {
+            cout << "The program is ended" << endl;
+        }
+        else
+        {
+            cout << "WRONG CHOICE" << endl;
+        }
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+//Insertions_and_Sorting_LinkedList.cpp
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef struct node
+{
+    int data;
+    struct node *next;
+}node;
+int display(node *head, int count)
+{
+    node *temp;
+    temp = head;
+    count = 0;
+    cout <<"***********The LINKED LIST is displaying****************" << endl;
+    while (temp != NULL)
+    {
+        cout << "\t" << temp->data;
+        count ++;
+        temp = temp -> next;
+    }
+    cout << endl;
+    cout << "The number of nodes is :: " << count << endl;
+    return count;
+}
+node *insert_beginning (node *head)
+{
+    node *newnode;
+    newnode = NULL;
+    newnode = (node *)malloc(sizeof(node));
+    cout << "Enter the data : " << endl;
+    cin >> newnode->data;
+    newnode->next = NULL;
+    if (head == NULL)
+    {
+        head = newnode;
+    }
+    else
+    {
+        newnode->next = head;
+        head = newnode;
+    }
+    return head;
+}
+node *createnode_end (node *head)
+{
+    node *newnode;
+    node *temp;
+    temp = head;
+    newnode = NULL;
+    newnode = (node *)malloc(sizeof (node));
+    cout << "Enter the data ::" << endl;
+    cin >> newnode-> data;
+    newnode->next = NULL;
+    if (head == NULL)
+    {
+        head = newnode;
+        temp = newnode;
+    }
+    else
+    {
+        while(temp -> next != NULL)
+        {
+            temp = temp -> next;
+        }
+        temp -> next = newnode;
+    }
+    return head;
+}
+node *insert_anyPosition(node *head, int count)
+{
+    //cout << count;
+    int pos;
+    node *temp;
+    node *newnode;
+    newnode = NULL;
+    newnode = (node *)malloc(sizeof(node));
+    cout << "Enter the data ::" << endl;
+    cin >> newnode -> data;
+    newnode -> next = NULL;
+    cout << "Enter the position to insert the new node ::" << endl;
+    cin >> pos;
+    temp = head;
+    if (pos > count + 1)
+    {
+        cout << "This value for position is invalid" << endl;
+    }
+    else
+    {
+        if (pos == 1)
+        {
+            head = insert_beginning(head);
+        }
+        else
+        {
+            for (int i = 1; i < pos-1; i ++)
+           {
+                temp = temp -> next;
+            }
+            newnode->next = temp -> next;
+            temp -> next = newnode;
+        }
+    }
+    return head;
+}
+node *sort_Linked_list(node *head, int count)
+{
+    node *temp1;
+    temp1 = head;
+    int min = temp1 -> data;
+    node *temp2;
+    temp2 = head;
+    node *ptr;
+    ptr = head;
+    for (int i = 0; i < count-1; i ++)
+    {
+        temp2 = temp1;
+        min = temp2 -> data;
+        ptr = temp2;
+        for (int j = i + 1; j < count; j ++)
+        {
+            temp2 = temp2 -> next;
+            if(temp2->data < min)
+            {
+                min = temp2->data;
+                ptr = temp2;
+            }
+        }
+        swap(temp1->data, ptr->data);
+        temp1 = temp1 -> next;
+    }
+    return head;
+}
+int main()
+{
+    int choice = 1;
+    int count = 0;
+    node *head;
+    head = NULL;
+    while(choice)
+    {
+        cout << "Enter 1 to add node to the linked list at the end position"<< endl;
+        cout << "Enter 3 to add node at the beginning" << endl;
+        cout << "Enter 4 to add node at any position" << endl;
+        cout << "Enter 2 to sort the linked list" << endl;
+        cout << "Enter 0 to end the program" << endl;
+        cout << "Enter your choice ::" << endl;
+        cin >> choice;
+        if (choice == 1)
+        {
+             head = createnode_end(head);
+             count = display(head, count);
+        }
+        else if (choice == 2)
+        {
+            head = sort_Linked_list(head, count);
+            count = display(head, count);
+        }
+        else if (choice == 3)
+        {
+            head = insert_beginning(head);
+            count = display(head, count);
+        }
+        else if (choice == 4)
+        {
+            head = insert_anyPosition(head, count);
+            count = display(head, count);
+        }
+        else if (choice == 0)
+        {
+            cout << "The program is ended" << endl;
+        }
+        else
+        {
+            cout << "WRONG CHOICE" << endl;
+        }
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+//Reversing_A_LinkedList_without_using_another_list_or_another_array.cpp
+#include <bits/stdc++.h>
+using namespace std;
+typedef struct node
+{
+    int data;
+    struct node *next;
+}node;
+int display(node *head, int count)
+{
+    node *temp;
+    temp = head;
+    count = 0;
+    cout <<"***********The LINKED LIST is displaying****************" << endl;
+    while (temp != NULL)
+    {
+        cout << "\t" << temp->data;
+        count ++;
+        temp = temp -> next;
+    }
+    cout << endl;
+    cout << "The number of nodes is :: " << count << endl;
+    return count;
+}
+node *insert_beginning (node *head)
+{
+    node *newnode;
+    newnode = NULL;
+    newnode = (node *)malloc(sizeof(node));
+    cout << "Enter the data : " << endl;
+    cin >> newnode->data;
+    newnode->next = NULL;
+    if (head == NULL)
+    {
+        head = newnode;
+    }
+    else
+    {
+        newnode->next = head;
+        head = newnode;
+    }
+    return head;
+}
+node *createnode_end (node *head)
+{
+    node *newnode;
+    node *temp;
+    temp = head;
+    newnode = NULL;
+    newnode = (node *)malloc(sizeof (node));
+    cout << "Enter the data ::" << endl;
+    cin >> newnode-> data;
+    newnode->next = NULL;
+    if (head == NULL)
+    {
+        head = newnode;
+        temp = newnode;
+    }
+    else
+    {
+        while(temp -> next != NULL)
+        {
+            temp = temp -> next;
+        }
+        temp -> next = newnode;
+    }
+    return head;
+}
+node *insert_anyPosition(node *head, int count)
+{
+    //cout << count;
+    int pos;
+    node *temp;
+    node *newnode;
+    newnode = NULL;
+    newnode = (node *)malloc(sizeof(node));
+    cout << "Enter the data ::" << endl;
+    cin >> newnode -> data;
+    newnode -> next = NULL;
+    cout << "Enter the position to insert the new node ::" << endl;
+    cin >> pos;
+    temp = head;
+    if (pos > count + 1)
+    {
+        cout << "This value for position is invalid" << endl;
+    }
+    else
+    {
+        if (pos == 1)
+        {
+            head = insert_beginning(head);
+        }
+        else
+        {
+            for (int i = 1; i < pos-1; i ++)
+           {
+                temp = temp -> next;
+            }
+            newnode->next = temp -> next;
+            temp -> next = newnode;
+        }
+    }
+    return head;
+}
+node *reverse_Linked_list (node *head, int count)
+{
+    //cout << count;
+    node *q5;
+     while (count != 0)
+    {
+          q5 = head;
+          for (int i = 1; i <= count - 1; i ++)
+        {
+            q5 = q5 -> next;
+        }
+        cout<<q5->data;
+        count --;
+     }
+     return head;
+}
+int main()
+{
+    int choice = 1;
+    int count = 0;
+    node *head;
+    head = NULL;
+    while(choice)
+    {
+        cout << "Enter 1 to add node to the linked list at the end position"<< endl;
+        cout << "Enter 3 to add node at the beginning" << endl;
+        cout << "Enter 4 to add node at any position" << endl;
+        cout << "Enter 2 to reverse the linked list" << endl;
+        cout << "Enter 0 to end the program" << endl;
+        cout << "Enter your choice ::" << endl;
+        cin >> choice;
+        if (choice == 1)
+        {
+             head = createnode_end(head);
+             count = display(head, count);
+        }
+        else if (choice == 2)
+        {
+            head = reverse_Linked_list(head, count);
+            count = display(head, count);
+        }
+        else if (choice == 3)
+        {
+            head = insert_beginning(head);
+            count = display(head, count);
+        }
+        else if (choice == 4)
+        {
+            head = insert_anyPosition(head, count);
+            count = display(head, count);
+        }
+        else if (choice == 0)
+        {
+            cout << "The program is ended" << endl;
+        }
+        else
+        {
+            cout << "WRONG CHOICE" << endl;
+        }
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+
+//Reversing_a_LinkedList by using ARRAY.c
+
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct node
+{
+	int data;
+	struct node *next;
+}node;
+node *createlist_and_reverseList (node *head, node *temp, node *newnode, int n);
+void displaylist (node *HEAD);
+int main()
+{
+	int n ,i;
+	node *HEAD;
+	HEAD = NULL;
+	printf("\n Enter the number of nodes in the linked list: ");
+	scanf("%d", &n);  // In createlist function, by using malloc function newnode is created 'n' times. //
+	node *head;
+	node *newnode;
+	node *temp;
+	HEAD = createlist_and_reverseList (head, newnode, temp, n);  // in HEAD in this main function, the address of the head is stored from the createlist function. FUNCTION CALL //
+	displaylist(HEAD);
+	return 0;
+}
+node * createlist_and_reverseList (node *head, node *newnode, node *temp, int n)
+{
+	head = NULL;
+	newnode = NULL;
+	temp = NULL;
+	int i;
+	for (i = 0; i < n; i ++)
+	{
+		newnode = (node*)malloc(sizeof (node));  // creates a new momory block during the run time and returns a void pointer and this is typecasted to struct node type pointer.  //
+		printf("\n Enter the data for node no. %d: ",i + 1);
+		scanf("%d", &(newnode -> data)); // The integer value is stored in the newly created node. //
+		newnode -> next = NULL;      //  NULL is stored in the address part of the newly created node.  //
+		if ( head == NULL)          //   Only For the first node of the linked list.    //
+		{
+			head = temp = newnode;   // Initially head was zero and now The address of the first node is stored in head permenently i.e. the 1st node is linked in the list.   //
+		}
+		else         //     Else part is executed from the second node to the last node.   //
+		{
+			temp->next = newnode;    //   After linking the first node in the list and then after creating the second node, now temp is having the address of the first node and newnode is having the address of the second node by the malloc function. And this address of the new node is assigned in the this address part of the first node. Thus the 2nd node is linked.   //
+			temp = newnode;         // Then by using malloc function the third node is created and its address is now stored in the newnode which is assigned in temp.  //
+		}
+	}
+	int arr[n];
+	temp = head;
+	i = 0;
+	while (temp != NULL)
+	{
+		arr[i] = temp -> data;
+		temp = temp -> next;
+		i ++;
+	}
+	i = n - 1;
+	temp = head;
+	while (temp != NULL)
+	{
+		temp -> data = arr[i];
+		temp = temp -> next;
+		i --;
+	}
+	return head;
+}
+void displaylist (node *HEAD)   // head pointer is coming from createlist function.   //
+{
+	node *temp = HEAD;      //  temp pointer is pointing to a node which is head.  //
+	printf("\n **********The REVERSED LINKED LIST is************ \n");
+	while (temp != NULL)    // here, temp -> next is not written as for that, the last node will not be printed. //
+	{
+		printf("%d ->",temp -> data );
+		temp = temp -> next;   // The address of the next node is stored in the temp and the loop is executed.   //
+	}
+}
+
+
+
+
+
+
+
+
+
+//linkedList_insertion.cpp
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef struct node
+{
+    int data;
+    struct node *next;
+}node;
+void display(node *head)
+{
+    cout << "Now, the linked list is "<< endl;
+    node *temp;
+    temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->data << "\t";
+        temp = temp -> next;
+    }
+    cout << endl;
+}
+node* insertion_beginning(node *head)
+{
+    node *newnode;
+    newnode = NULL;
+    newnode = (node *)malloc(sizeof(node));
+    newnode -> next = NULL;
+    cout << "Enter the data" << endl;
+    cin >> newnode->data;
+    if (head == NULL)
+    {
+        head = newnode;
+    }
+    else
+    {
+        newnode -> next = head;
+        head = newnode;
+    }
+    display(head);
+    return head;
+}
+node* insertion_end(node *head)
+{
+    node *newnode;
+    newnode = NULL;
+    newnode = (node *)malloc(sizeof(node));
+    newnode -> next = NULL;
+    cout << "Enter the data" << endl;
+    cin >> newnode->data;
+    node *temp;
+    temp = head;
+    if (head == NULL)
+    {
+        head = newnode;
+    }
+    else
+    {
+        while(temp -> next != NULL)
+        {
+            temp = temp -> next;
+        }
+        temp -> next = newnode;
+    }
+     display(head);
+     return head;
+}
+node *insertion_middle(node *head)
+{
+    node *newnode;
+    int pos;
+    newnode = NULL;
+    newnode = (node *)malloc(sizeof(node));
+    newnode -> next = NULL;
+    cout << "Enter the data" << endl;
+    cin >> newnode->data;
+    node *temp;
+    temp = head;
+    if (head == NULL)
+    {
+        head = newnode;
+    }
+    else
+    {
+        cout << "Enter the position where you wanna insert the new node " << endl;
+        cin >> pos;
+        for (int i = 1; i < pos-1; i ++)
+        {
+            temp = temp -> next;
+        }
+        newnode->next = temp -> next;
+        temp -> next = newnode;
+    }
+     display(head);
+     return head;
+}
+int main()
+{
+    node *head, *newnode;
+    head = NULL;
+    newnode = NULL;
+    int n = 1;
+    cout << "Enter 1 for insertion at beginning.....2 for insertion at middle.....3 for insertion at end" << endl;
+    cout << "Enter 0 for end" << endl;
+    while (n != 0)
+    {
+        cout << "Enter your choice" << endl;
+        cin >> n;
+        if (n==1)
+        {
+            head = insertion_beginning(head);
+        }
+        else if (n==2)
+        {
+            head = insertion_middle(head);
+        }
+        else if (n==3)
+        {
+            head = insertion_end(head);
+        }
+        else if (n==0)
+        {
+            cout << "The program has been ended" << endl;
+        }
+        else 
+        {
+            cout << "Wrong Choice" << endl;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+---------------------------------Interpolation search vs Binary search---------------------------------
+
+
+
+Interpolation search works better than Binary Search for a Sorted and Uniformly Distributed array. 
+
+Binary Search goes to the middle element to check irrespective of search-key. On the other hand, Interpolation Search may go to different locations according to search-key. If the value of the search-key is close to the last element, Interpolation Search is likely to start search toward the end side.
+
+On average the interpolation search makes about log(log(n)) comparisons (if the elements are uniformly distributed), where n is the number of elements to be searched. In the worst case (for instance where the numerical values of the keys increase exponentially) it can make up to O(n) comparisons. 
+
+Interpolation Search Article 
+
+Sources: 
+http://en.wikipedia.org/wiki/Interpolation_search 

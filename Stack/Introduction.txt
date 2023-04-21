@@ -1,0 +1,394 @@
+                                INTRODUCTION TO STACK:-->   
+                            --------------------------------
+
+
+Stack is a linear data structure which follows a particular order in which the operations are performed. The order may be LIFO(Last In First Out) or FILO(First In Last Out).
+
+
+There are many real-life examples of a stack. Consider an example of plates stacked over one another in the canteen. The plate which is at the top is the first one to be removed, i.e. the plate which has been placed at the bottommost position remains in the stack for the longest period of time. So, it can be simply seen to follow LIFO(Last In First Out)/FILO(First In Last Out) order.
+
+
+Stack is a linear data structure that follows a particular order in which the operations are performed. The order may be LIFO(Last In First Out) or FILO(First In Last Out).
+
+
+Mainly the following three basic operations are performed in the stack:
+
+1) Push: Adds an item in the stack. If the stack is full, then it is said to be an Overflow condition.
+2) Pop: Removes an item from the stack. The items are popped in the reversed order in which they are pushed. If the stack is empty, then it is said to be an Underflow condition.
+3) Peek or Top: Returns the top element of the stack.
+4) isEmpty: Returns true if the stack is empty, else false.
+
+
+How to understand a stack practically? 
+There are many real-life examples of a stack. Consider the simple example of plates stacked over one another in a canteen. The plate which is at the top is the first one to be removed, i.e. the plate which has been placed at the bottommost position remains in the stack for the longest period of time. So, it can be simply seen to follow the LIFO/FILO order.
+
+
+Time Complexities of operations on stack:
+
+push(), pop(), isEmpty() and peek() all take O(1) time. We do not run any loop in any of these operations.
+
+
+Applications of stack:
+
+1) Balancing of symbols
+2) Infix to Postfix /Prefix conversion
+3) Redo-undo features at many places like editors, photoshop.
+4) Forward and backward feature in web browsers
+5) Used in many algorithms like Tower of Hanoi, tree traversals, stock span problem, histogram problem.
+6) Backtracking is one of the algorithm designing techniques. Some examples of backtracking are the Knight-Tour problem, N-Queen problem, find your way through a maze, and game-like chess or checkers in all these problems we dive into someway if that way is not efficient we come back to the previous state and go into some another path. To get back from a current state we need to store the previous state for that purpose we need a stack.
+7) In Graph Algorithms like Topological Sorting and Strongly Connected Components
+8) In Memory management, any modern computer uses a stack as the primary management for a running purpose. Each program that is running in a computer system has its own memory allocations
+9) String reversal is also another application of stack. Here one by one each character gets inserted into the stack. So the first character of the string is on the bottom of the stack and the last element of a string is on the top of the stack. After Performing the pop operations on the stack we get a string in reverse order.
+
+
+Implementation: 
+There are two ways to implement a stack: 
+1) Using array
+2) Using linked list
+
+
+
+https://youtu.be/vZEuSFXSMDI
+
+
+
+                                Stack in C++ STL:-->        
+                            ----------------------------
+
+
+
+Stacks are a type of container adaptors with LIFO(Last In First Out) type of working, where a new element is added at one end (top) and an element is removed from that end only.  Stack uses an encapsulated object of either vector or deque (by default) or list (sequential container class) as its underlying container, providing a specific set of member functions to access its elements.
+
+Stack Syntax:-
+
+For creating  a stack, we must include the <stack> header file in our code. We then use this syntax to define the std::stack:
+
+template <class Type, class Container = deque<Type> > class stack;
+Type – is the Type of element contained in the std::stack. It can be any valid C++ type or even a user-defined type.
+
+Container – is the Type of underlying container object.
+
+Member Types:-
+
+value_type- The first template parameter, T. It denotes the element types.
+
+container_type- The second template parameter, Container. It denotes the underlying container type.
+
+size_type- Unsigned integral type.
+  
+The functions associated with stack are: 
+empty() – Returns whether the stack is empty – Time Complexity : O(1) 
+size() – Returns the size of the stack – Time Complexity : O(1) 
+top() – Returns a reference to the top most element of the stack – Time Complexity : O(1) 
+push(g) – Adds the element ‘g’ at the top of the stack – Time Complexity : O(1) 
+pop() – Deletes the top most element of the stack – Time Complexity : O(1) 
+
+
+CODE:--> 
+
+#include <iostream>
+#include <stack>
+using namespace std;
+int main() {
+	stack<int> stack;
+	stack.push(21);
+	stack.push(22);
+	stack.push(24);
+	stack.push(25);
+	
+		stack.pop();
+	stack.pop();
+
+	while (!stack.empty()) {
+		cout << ' ' << stack.top();
+		stack.pop();
+	}
+}
+
+
+Output
+ 22 21
+
+
+Code Explanation:
+
+-->   Include the stack header file in our code to use its functions if already included <bits/stdc++.h> then no need of stack header file because it has already inbuilt function in it.
+-->   Include the std namespace in our code to use its classes without calling it.
+-->   Include the iostream header file or <bits/stdc++.h> in our code to use its functions.
+-->   Call the main() function. The program logic should be added within this function.
+-->   Create a stack to store integer values.
+-->   Use the push() function to insert the value 21 into the stack.
+-->   Use the push() function to insert the value 22 into the stack.
+-->   Use the push() function to insert the value 24 into the stack.
+-->   Use the push() function to insert the value 25 into the stack.
+-->   Use the pop() function to remove the top element from the stack, that is, 25. The top element now becomes 24.
+-->   Use the pop() function to remove the top element from the stack, that is, 24. The top element now becomes 22.
+-->   Use a while loop and empty() function to check whether the stack is NOT empty. The ! is the NOT operator.
+-->   Printing the current contents of the stack on the console.
+-->   Call the pop() function on the stack.
+-->   End of the body of the while loop.
+-->   End of the main() function body.
+
+
+List of functions of Stack: 
+
+-->   stack::top() in C++ STL
+-->   stack::empty() and stack::size() in C++ STL
+-->   stack::push() and stack::pop() in C++ STL
+-->   stack::swap() in C++ STL
+-->   stack::emplace() in C++ STL
+-->   Recent Articles on C++ Stack
+
+
+
+
+                        Stack Class in Java:-->     
+                    --------------------------------
+
+
+Java Collection framework provides a Stack class that models and implements a Stack data structure. The class is based on the basic principle of last-in-first-out. In addition to the basic push and pop operations, the class provides three more functions of empty, search, and peek. The class can also be said to extend Vector and treats the class as a stack with the five mentioned functions. The class can also be referred to as the subclass of Vector. The below diagram shows the hierarchy of the Stack class: 
+
+ 
+ 
+
+Stack Class in Java
+
+The class supports one default constructor Stack() which is used to create an empty stack. 
+
+Declaration:
+
+public class Stack<E> extends Vector<E>
+All Implemented Interfaces:
+
+Serializable: It is a marker interface that classes must implement if they are to be serialized and deserialized.
+Cloneable: This is an interface in Java which needs to be implemented by a class to allow its objects to be cloned.
+Iterable<E>: This interface represents a collection of objects which is iterable — meaning which can be iterated.
+Collection<E>: A Collection represents a group of objects known as its elements. The Collection interface is used to pass around collections of objects where maximum generality is desired.
+List<E>: The List interface provides a way to store the ordered collection. It is a child interface of Collection.
+RandomAccess: This is a marker interface used by List implementations to indicate that they support fast (generally constant time) random access.
+How to Create a Stack?
+In order to create a stack, we must import java.util.stack package and use the Stack() constructor of this class. The below example creates an empty Stack.
+
+Stack<E> stack = new Stack<E>();
+
+Here E is the type of Object.
+
+// Java code for stack implementation
+
+import java.io.*;
+import java.util.*;
+
+class Test
+{
+	// Pushing element on the top of the stack
+	static void stack_push(Stack<Integer> stack)
+	{
+		for(int i = 0; i < 5; i++)
+		{
+			stack.push(i);
+		}
+	}
+	
+	// Popping element from the top of the stack
+	static void stack_pop(Stack<Integer> stack)
+	{
+		System.out.println("Pop Operation:");
+
+		for(int i = 0; i < 5; i++)
+		{
+			Integer y = (Integer) stack.pop();
+			System.out.println(y);
+		}
+	}
+
+	// Displaying element on the top of the stack
+	static void stack_peek(Stack<Integer> stack)
+	{
+		Integer element = (Integer) stack.peek();
+		System.out.println("Element on stack top: " + element);
+	}
+	
+	// Searching element in the stack
+	static void stack_search(Stack<Integer> stack, int element)
+	{
+		Integer pos = (Integer) stack.search(element);
+
+		if(pos == -1)
+			System.out.println("Element not found");
+		else
+			System.out.println("Element is found at position: " + pos);
+	}
+
+
+	public static void main (String[] args)
+	{
+		Stack<Integer> stack = new Stack<Integer>();
+
+		stack_push(stack);
+		stack_pop(stack);
+		stack_push(stack);
+		stack_peek(stack);
+		stack_search(stack, 2);
+		stack_search(stack, 6);
+	}
+}
+
+Output:
+Pop Operation:
+4
+3
+2
+1
+0
+Element on stack top: 4
+Element is found at position: 3
+Element not found
+
+
+Performing various operations on Stack class:
+
+
+1. Adding Elements: In order to add an element to the stack, we can use the push() method. This push() operation place the element at the top of the stack.
+
+// Java program to add the
+// elements in the stack
+import java.io.*;
+import java.util.*;
+
+class StackDemo {
+
+	// Main Method
+	public static void main(String[] args)
+	{
+
+		// Default initialization of Stack
+		Stack stack1 = new Stack();
+
+		// Initialization of Stack
+		// using Generics
+		Stack<String> stack2 = new Stack<String>();
+
+		// pushing the elements
+		stack1.push(4);
+		stack1.push("All");
+		stack1.push("Geeks");
+
+		stack2.push("Geeks");
+		stack2.push("For");
+		stack2.push("Geeks");
+
+		// Printing the Stack Elements
+		System.out.println(stack1);
+		System.out.println(stack2);
+	}
+}
+
+Output:
+[4, All, Geeks]
+[Geeks, For, Geeks]
+
+
+
+2. Accessing the Element: To retrieve or fetch the first element of the Stack or the element present at the top of the Stack, we can use peek() method. The element retrieved does not get deleted or removed from the Stack. 
+
+// Java program to demonstrate the accessing
+// of the elements from the stack
+import java.util.*;
+import java.io.*;
+
+public class StackDemo {
+
+	// Main Method
+	public static void main(String args[])
+	{
+		// Creating an empty Stack
+		Stack<String> stack = new Stack<String>();
+
+		// Use push() to add elements into the Stack
+		stack.push("Welcome");
+		stack.push("To");
+		stack.push("Geeks");
+		stack.push("For");
+		stack.push("Geeks");
+
+		// Displaying the Stack
+		System.out.println("Initial Stack: " + stack);
+
+		// Fetching the element at the head of the Stack
+		System.out.println("The element at the top of the"
+						+ " stack is: " + stack.peek());
+
+		// Displaying the Stack after the Operation
+		System.out.println("Final Stack: " + stack);
+	}
+}
+
+Output:
+Initial Stack: [Welcome, To, Geeks, For, Geeks]
+The element at the top of the stack is: Geeks
+Final Stack: [Welcome, To, Geeks, For, Geeks]
+
+
+3. Removing Elements: To pop an element from the stack, we can use the pop() method. The element is popped from the top of the stack and is removed from the same.
+
+// Java program to demonstrate the removing
+// of the elements from the stack
+import java.util.*;
+import java.io.*;
+
+public class StackDemo {
+	public static void main(String args[])
+	{
+		// Creating an empty Stack
+		Stack<Integer> stack = new Stack<Integer>();
+
+		// Use add() method to add elements
+		stack.push(10);
+		stack.push(15);
+		stack.push(30);
+		stack.push(20);
+		stack.push(5);
+
+		// Displaying the Stack
+		System.out.println("Initial Stack: " + stack);
+
+		// Removing elements using pop() method
+		System.out.println("Popped element: "
+						+ stack.pop());
+		System.out.println("Popped element: "
+						+ stack.pop());
+
+		// Displaying the Stack after pop operation
+		System.out.println("Stack after pop operation "
+						+ stack);
+	}
+}
+
+Output:
+
+Initial Stack: [10, 15, 30, 20, 5]
+Popped element: 5
+Popped element: 20
+Stack after pop operation [10, 15, 30]
+
+
+
+Methods in Stack Class : 
+
+
+
+........if _name_ == '_main_':
+    x = int(input())
+    y = int(input())
+    z = int(input())
+    n = int(input())
+    l1=[]
+    for i in range(0,n,1):
+        i=int(input())
+        j=int(input())
+        k=int(input())
+        l1.append(i)
+        l1.append(j)
+        l1.append(k)
+    if i+j+k!=n:
+        print(l1)

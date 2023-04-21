@@ -1,0 +1,1072 @@
+********************************************    Vector of Vectors in C++ STL with Examples    *******************************************************
+Vectors are known as dynamic arrays with the ability to resize itself automatically when an element is inserted or deleted, with their storage being handled automatically by the container.
+
+Vector of Vectors is a two-dimensional vector with a variable number of rows where each row is vector. Each index of vector stores a vector which can be traversed and accessed using iterators. It is similar to an Array of Vectors but with dynamic properties.
+
+Syntax:
+
+vector<vector<data_type>> vec;
+
+Example:
+
+vector<vector<int>> vec{ { 1, 2, 3 }, 
+                         { 4, 5, 6 }, 
+                         { 7, 8, 9, 4 } }; 
+where vec is the vector of vectors with different
+      number of elements in different rows
+
+
+
+
+
+
+
+
+Insertion in Vector of Vectors:
+
+Elements can be inserted into a vector using the push_back() function of C++ STL.
+
+Below example demonstrates the insertion operation in a vector of vectors. The code creates a 2D vector by using the push_back() function and then displays the matrix.
+
+Syntax:
+
+vector_name.push_back(value)
+
+where value refers to the element
+      to be added in the back of the vector
+
+Example 1:
+
+v2 = {1, 2, 3}
+v1.push_back(v2);
+This function pushes vector v2 into vector of vectors v1. Therefore v1 becomes { {1, 2, 3} }.
+
+Example 2:
+
+v2 = {4, 5, 6}
+v1.push_back(v2);
+This function pushes vector v2 into existing vector of vectors v1 and v1 becomes v1 = { {1, 2, 3}, {4, 5, 6} }
+
+Below is the example to demonstrate insertion into a vector of vectors.
+
+// C++ program to demonstrate insertion
+// into a vector of vectors
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Defining the rows and columns of
+// vector of vectors
+#define ROW 4
+#define COL 5
+
+int main()
+{
+	// Initializing the vector of vectors
+	vector<vector<int> > vec;
+
+	// Elements to insert in column
+	int num = 10;
+
+	// Inserting elements into vector
+	for (int i = 0; i < ROW; i++) {
+		// Vector to store column elements
+		vector<int> v1;
+
+		for (int j = 0; j < COL; j++) {
+			v1.push_back(num);
+			num += 5;
+		}
+
+		// Pushing back above 1D vector
+		// to create the 2D vector
+		vec.push_back(v1);
+	}
+
+	// Displaying the 2D vector
+	for (int i = 0; i < vec.size(); i++) {
+		for (int j = 0; j < vec[i].size(); j++)
+			cout << vec[i][j] << " ";
+		cout << endl;
+	}
+	return 0;
+}
+
+Output:
+10 15 20 25 30 
+35 40 45 50 55 
+60 65 70 75 80 
+85 90 95 100 105
+
+
+
+
+
+
+
+
+Removal or Deletion in a Vector of Vectors
+
+Elements can be removed from a vector of vectors using the pop_back() function of C++ STL.
+
+Below example demonstrates the removal operation in a vector of vectors. The code removes elements from a 2D vector by using the pop_back() function and then displays the matrix.
+Syntax:
+
+vector_name[row_position].pop_back()
+Example 1: Let the vector of vectors be vector v = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } }
+
+v[2].pop_back()
+This function removes element 9 from the last row vector. Therefore v becomes { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8 } }.
+
+Example 2:
+
+v[1].pop_back()
+This function removes element 6 from the last second row vector. Therefore v becomes { { 1, 2, 3 }, { 4, 5 }, { 7, 8 } }.
+
+Below is the example to demonstrate removal from a vector of vectors.
+
+// C++ program to demonstrate removal
+// from a vector of vectors
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Driver Method
+int main()
+{
+	// Initializing 2D vector "vect" with
+	// sample values
+	vector<vector<int> > vec{ { 1, 2, 3 },
+							{ 4, 5, 6 },
+							{ 7, 8, 9 } };
+
+	// Removing elements from the
+	// last row of the vector
+	vec[2].pop_back();
+	vec[1].pop_back();
+
+	// Displaying the 2D vector
+	for (int i = 0; i < 3; i++) {
+		for (
+			auto it = vec[i].begin();
+			it != vec[i].end(); it++)
+			cout << *it << " ";
+		cout << endl;
+	}
+	return 0;
+}
+
+Output:
+1 2 3 
+4 5 
+7 8
+
+
+
+
+
+
+
+
+Traversal of a Vector of Vectors
+
+The vector of vectors can be traversed using the iterators in C++. The following code demonstrates the traversal of a 2D vector.
+
+Syntax:
+
+for i in [0, n)
+{
+    for (iterator it = v[i].begin();
+         it != v[i].end(); it++) 
+   {
+        // Operations to be done
+        // For example to print
+        print(*it)
+    }
+}
+
+Below is the example to demonstrate traversal in a vector of vectors.
+
+// C++ code to demonstrate traversal
+// of a 2D vector
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Driver Method
+int main()
+{
+	// Initializing 2D vector "vect" with
+	// sample values
+	vector<vector<int> > vec{ { 1, 2, 3 },
+							{ 4, 5, 6 },
+							{ 7, 8, 9 } };
+
+	// Displaying the 2D vector
+	for (int i = 0; i < 3; i++) {
+		for (
+			auto it = vec[i].begin();
+			it != vec[i].end(); it++)
+			cout << *it << " ";
+		cout << endl;
+	}
+
+	return 0;
+}
+
+Output:
+1 2 3 
+4 5 6 
+7 8 9
+
+
+
+
+
+
+
+
+2D Vector In C++ With User Defined Size
+
+A 2D vector is a vector of the vector. Like 2D arrays, we can declare and assign values to a 2D vector! 
+Assuming you are familiar with a normal vector in C++, with the help of an example we demonstrate how a 2D vector differs from a normal vector below: 
+
+
+/* Vectors belong to a C++ library
+called STL so we need to import
+it first! */
+#include <vector>
+using namespace std;
+int main()
+{
+	/*
+	In the case of a normal vector we initialize it as:
+	
+	1. vector<datatype> variable_name
+	
+	Now in the case of a 2D vector all we do is create
+	a vector of datatype vector.
+	
+	We simply replace "datatype" with "vector<int>":
+	
+	1. vector<vector<int>> variable_name
+	
+	That's literally it! We just created a 2D vector!
+	On line 23 below we declare an actual 2D vector
+	named "vect".
+	*/
+	
+	vector<vector<int>> vect;
+
+	return 0;
+}
+
+
+In a 2D vector, every element is a vector.
+
+
+/* C++ code to demonstrate a 2D vector
+with elements(vectors) inside it. */
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+	/*
+	Below we initialize a 2D vector
+	named "vect" on line 12 and then
+	we declare the values on
+	line 14, 15 and 16 respectively.
+	*/
+	
+	vector<vector<int>> vect
+	{
+		{1, 2, 3},
+		{4, 5, 6},
+		{7, 8, 9}
+	};
+	
+	/*
+	Now we print the values that
+	we just declared on lines
+	14, 15 and 16 using a simple
+	nested for loop.
+	*/
+	
+	for (int i = 0; i < vect.size(); i++)
+	{
+		for (int j = 0; j < vect[i].size(); j++)
+		{
+			cout << vect[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+	return 0;
+}
+
+Output
+1 2 3 
+4 5 6 
+7 8 9 
+
+
+Another approach to access the vector elements:
+
+/* C++ code to demonstrate a 2D vector
+with elements(vectors) inside it. */
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+	/*
+	Below we initialize a 2D vector
+	named "vect" on line 12 and then
+	we declare the values on
+	line 14, 15 and 16 respectively.
+	*/
+	
+	vector<vector<int>> vect
+	{
+		{1, 2, 3},
+		{4, 5, 6},
+		{7, 8, 9}
+	};
+	
+	/*
+	Now we print the values that
+	we just declared on lines
+	14, 15 and 16 using a simple
+	nested for loop with the help of iterator.
+	*/
+	
+	/*
+	vector<vector<int>> vect
+	We can divide this declaration to two parts, which will
+	help us to understand the below concepts.
+	
+	1. vect is a 2D vector consisting multiple elements of type vector<int>.
+	2. vector<int> is a 1D vector consisting of multiple int data.
+	
+	So we can use iterator provided by STL instead of
+	i,j variable used in for loop. It can reduce the error which can
+	happen wrt to i, j operations(i++, j++)	
+	
+	In the below code we are using iterator to access the vector elements.
+	1. We are getting vect1D vectors of type vector<int> from the 2D vector vect.
+	2. We are getting int elements to x from the vector<int> vect 1D vector.
+	
+	*/
+	
+	for (vector<int> vect1D : vect)
+	{
+		for (int x : vect1D)
+		{
+			cout << x << " ";
+		}
+		cout << endl;
+	}
+
+	return 0;
+}
+
+Output
+1 2 3 
+4 5 6 
+7 8 9 
+
+
+Like Java’s jagged arrays, each element of a 2D vector can contain a different number of values.
+
+
+/*
+C++ program to demonstrate a 2D vector where
+each of its elements is of different size.
+*/
+#include <iostream>
+#include <vector>
+using namespace std;
+int main()
+{
+	/*
+	We initialize a 2D vector
+	named "vect" on line 16 with
+	different number of values
+	in each element.
+	*/
+	
+	vector<vector<int>> vect
+	{
+		/* Element one with 2 values in it. */
+		{1, 2},
+	
+		/* Element two with 3 values in it. */
+		{4, 5, 6},
+	
+		/* Element three with 4 values in it. */
+		{7, 8, 9, 10}
+	};
+
+	/*
+	Now we print the vector that we
+	just defined using a simple
+	nested for loop.
+	*/
+	
+	for (int i = 0; i < vect.size(); i++)
+	{
+		for (int j = 0; j < vect[i].size(); j++)
+		{
+			cout << vect[i][j] << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
+
+Output
+1 2 
+4 5 6 
+7 8 9 10 
+
+
+Exercise Problem: Define the 2D vector with different sizes of columns. 
+
+Examples: 
+
+Input : Number of rows : 5 
+        Number of columns in rows : 
+        2 3 4 5 1
+
+Output : 1 2
+         1 2 3
+         1 2 3 4
+         1 2 3 4 5 
+         1
+
+Input : Number of rows : 3
+        Number of columns in rows : 
+        3 2 1
+
+Output : 1 2 3
+         1 2
+         1
+
+
+2D vectors are often treated as a matrix with “rows” and “columns” inside it. Under the hood they are actually elements of the 2D vector. 
+We first declare an integer variable named “row” and then an array named “column” which is going to hold the value of the size of each row. 
+
+After that we proceed to initialize the memory of every row by the size of column.
+
+
+/*
+C++ program to create a 2D vector where
+every row has a certain number of values
+as defined by the user.(On line 13)
+*/
+#include <iostream>
+#include <vector>
+using namespace std;
+int main()
+{
+	
+	/* Here we tell how many rows
+	the 2D vector is going to have. */
+	int row = 5;
+
+	/* We define the number of values
+	each row is supposed to have. */
+	int colom[] = {5, 3, 4, 2, 1};
+
+	/*
+	We now create a vector of vector with size
+	equal to row.
+	*/
+	
+	vector<vector<int>> vec(row);
+	/*
+	On line 21 we created a 2D vector and assigned
+	it a capacity of "row"(in this case 5) units.
+	*/
+	
+	/*
+	Now we will proceed to create the structure of
+	our 2D vector by assigning the value of rows and
+	columns through a nested for loop.
+	*/
+
+	for(int i = 0; i < row; i++)
+	{
+		/* Declaring the size of the column. */
+		int col = colom[i];
+
+		/*
+		On the 43rd line we declare the
+		i-th row to the size of the column.
+		We create a normal vector of capacity "col" which
+		in every iteration of the for loop will define the
+		values inside of each row.
+		*/
+		vec[i] = vector<int>(col);
+		for(int j = 0; j < col; j++)
+		{
+			vec[i][j] = j + 1;
+		}
+	}
+	
+	/*
+	We now finally use a simple nested for loop
+	to print the 2D vector that we just created above.
+	*/
+
+	for(int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < vec[i].size(); j++)
+		{
+			cout << vec[i][j] << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
+
+Output
+1 2 3 4 5 
+1 2 3 
+1 2 3 4 
+1 2 
+1 
+
+
+Another Approach :
+
+Suppose we want to initialize a 2D vector of “n” rows and “m” columns, with a value 0.
+
+// CPP program
+#include <iostream>
+#include <vector>
+using namespace std;
+int main()
+{
+	int n = 3;
+	int m = 4;
+
+	/*
+	We create a 2D vector containing "n"
+	elements each having the value "vector<int> (m, 0)".
+	"vector<int> (m, 0)" means a vector having "m"
+	elements each of value "0".
+	Here these elements are vectors.
+	*/
+	vector<vector<int>> vec( n , vector<int> (m, 0));
+
+	for(int i = 0; i < n; i++)
+	{
+		for(int j = 0; j < m; j++)
+		{
+			cout << vec[i][j] << " ";
+		}
+		cout<< endl;
+	}
+	
+	return 0;
+}
+
+Output
+0 0 0 0 
+0 0 0 0 
+0 0 0 0 
+
+
+Yet Another Approach: 
+
+Suppose we want to create a 2D vector of “n” rows and “m” columns and input values. 
+
+// CPP program
+#include <iostream>
+#include <vector>
+using namespace std;
+int main()
+{
+	int n = 4;
+	int m = 5;
+
+	/*
+	Create a vector containing "n"
+	vectors each of size "m".
+	*/
+	vector<vector<int>> vec( n , vector<int> (m));
+
+	for(int i = 0; i < n; i++)
+	{
+		for(int j = 0; j < m; j++)
+		{
+			vec[i][j] = j + i + 1;
+		}
+	}
+
+	for(int i = 0; i < n; i++)
+	{
+		for(int j = 0; j < m; j++)
+		{
+			cout << vec[i][j] << " ";
+		}
+		cout << endl;
+	}
+	
+return 0;
+}
+
+Output:
+1 2 3 4 5 
+2 3 4 5 6 
+3 4 5 6 7 
+4 5 6 7 8 
+
+
+
+
+
+
+
+
+Vectors are same as dynamic arrays with the ability to resize itself automatically when an element is inserted or deleted, with their storage being handled automatically by the container. Vector elements are placed in contiguous storage so that they can be accessed and traversed using iterators. In vectors, data is inserted at the end. Inserting at the end takes differential time, as sometimes there may be a need of extending the array. Removing the last element takes only constant time because no resizing happens. Inserting and erasing at the beginning or in the middle is linear in time.
+
+ 
+
+Certain functions associated with the vector are:
+
+Iterators
+
+1. begin() – Returns an iterator pointing to the first element in the vector
+2. end() – Returns an iterator pointing to the theoretical element that follows the last element in the vector
+3. rbegin() – Returns a reverse iterator pointing to the last element in the vector (reverse beginning). It moves from last to first element
+4. rend() – Returns a reverse iterator pointing to the theoretical element preceding the first element in the vector (considered as reverse end)
+5. cbegin() – Returns a constant iterator pointing to the first element in the vector.
+6. cend() – Returns a constant iterator pointing to the theoretical element that follows the last element in the vector.
+7. crbegin() – Returns a constant reverse iterator pointing to the last element in the vector (reverse beginning). It moves from last to first element
+8. crend() – Returns a constant reverse iterator pointing to the theoretical element preceding the first element in the vector (considered as reverse end)
+
+// C++ program to illustrate the
+// iterators in vector
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+	vector<int> g1;
+
+	for (int i = 1; i <= 5; i++)
+		g1.push_back(i);
+
+	cout << "Output of begin and end: ";
+	for (auto i = g1.begin(); i != g1.end(); ++i)
+		cout << *i << " ";
+
+	cout << "\nOutput of cbegin and cend: ";
+	for (auto i = g1.cbegin(); i != g1.cend(); ++i)
+		cout << *i << " ";
+
+	cout << "\nOutput of rbegin and rend: ";
+	for (auto ir = g1.rbegin(); ir != g1.rend(); ++ir)
+		cout << *ir << " ";
+
+	cout << "\nOutput of crbegin and crend : ";
+	for (auto ir = g1.crbegin(); ir != g1.crend(); ++ir)
+		cout << *ir << " ";
+
+	return 0;
+}
+
+Output:
+Output of begin and end: 1 2 3 4 5 
+Output of cbegin and cend: 1 2 3 4 5 
+Output of rbegin and rend: 5 4 3 2 1 
+Output of crbegin and crend : 5 4 3 2 1
+
+
+
+
+
+
+
+
+Capacity:
+
+1. size() – Returns the number of elements in the vector.
+2. max_size() – Returns the maximum number of elements that the vector can hold.
+3. capacity() – Returns the size of the storage space currently allocated to the vector expressed as number of elements.
+4. resize(n) – Resizes the container so that it contains ‘n’ elements.
+5. empty() – Returns whether the container is empty.
+6. shrink_to_fit() – Reduces the capacity of the container to fit its size and destroys all elements beyond the capacity.
+7. reserve() – Requests that the vector capacity be at least enough to contain n elements.
+
+// C++ program to illustrate the
+// capacity function in vector
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+	vector<int> g1;
+
+	for (int i = 1; i <= 5; i++)
+		g1.push_back(i);
+
+	cout << "Size : " << g1.size();
+	cout << "\nCapacity : " << g1.capacity();
+	cout << "\nMax_Size : " << g1.max_size();
+
+	// resizes the vector size to 4
+	g1.resize(4);
+
+	// prints the vector size after resize()
+	cout << "\nSize : " << g1.size();
+
+	// checks if the vector is empty or not
+	if (g1.empty() == false)
+		cout << "\nVector is not empty";
+	else
+		cout << "\nVector is empty";
+
+	// Shrinks the vector
+	g1.shrink_to_fit();
+	cout << "\nVector elements are: ";
+	for (auto it = g1.begin(); it != g1.end(); it++)
+		cout << *it << " ";
+
+	return 0;
+}
+
+Output:
+Size : 5
+Capacity : 8
+Max_Size : 4611686018427387903
+Size : 4
+Vector is not empty
+Vector elements are: 1 2 3 4
+
+
+
+
+
+
+
+
+
+Element access:
+
+1. reference operator [g] – Returns a reference to the element at position ‘g’ in the vector
+2. at(g) – Returns a reference to the element at position ‘g’ in the vector
+3. front() – Returns a reference to the first element in the vector
+4. back() – Returns a reference to the last element in the vector
+5. data() – Returns a direct pointer to the memory array used internally by the vector to store its owned elements.
+
+// C++ program to illustrate the
+// element accesser in vector
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	vector<int> g1;
+
+	for (int i = 1; i <= 10; i++)
+		g1.push_back(i * 10);
+
+	cout << "\nReference operator [g] : g1[2] = " << g1[2];
+
+	cout << "\nat : g1.at(4) = " << g1.at(4);
+
+	cout << "\nfront() : g1.front() = " << g1.front();
+
+	cout << "\nback() : g1.back() = " << g1.back();
+
+	// pointer to the first element
+	int* pos = g1.data();
+
+	cout << "\nThe first element is " << *pos;
+	return 0;
+}
+
+Output:
+Reference operator [g] : g1[2] = 30
+at : g1.at(4) = 50
+front() : g1.front() = 10
+back() : g1.back() = 100
+The first element is 10
+
+Modifiers:
+
+1. assign() – It assigns new value to the vector elements by replacing old ones
+2. push_back() – It push the elements into a vector from the back
+3. pop_back() – It is used to pop or remove elements from a vector from the back.
+4. insert() – It inserts new elements before the element at the specified position
+5. erase() – It is used to remove elements from a container from the specified position or range.
+6. swap() – It is used to swap the contents of one vector with another vector of same type. Sizes may differ.
+7. clear() – It is used to remove all the elements of the vector container
+8. emplace() – It extends the container by inserting new element at position
+9. emplace_back() – It is used to insert a new element into the vector container, the new element is added to the end of the vector.
+
+// C++ program to illustrate the
+// Modifiers in vector
+#include <bits/stdc++.h>
+#include <vector>
+using namespace std;
+
+int main()
+{
+	// Assign vector
+	vector<int> v;
+
+	// fill the array with 10 five times
+	v.assign(5, 10);
+
+	cout << "The vector elements are: ";
+	for (int i = 0; i < v.size(); i++)
+		cout << v[i] << " ";
+
+	// inserts 15 to the last position
+	v.push_back(15);
+	int n = v.size();
+	cout << "\nThe last element is: " << v[n - 1];
+
+	// removes last element
+	v.pop_back();
+
+	// prints the vector
+	cout << "\nThe vector elements are: ";
+	for (int i = 0; i < v.size(); i++)
+		cout << v[i] << " ";
+
+	// inserts 5 at the beginning
+	v.insert(v.begin(), 5);
+
+	cout << "\nThe first element is: " << v[0];
+
+	// removes the first element
+	v.erase(v.begin());
+
+	cout << "\nThe first element is: " << v[0];
+
+	// inserts at the beginning
+	v.emplace(v.begin(), 5);
+	cout << "\nThe first element is: " << v[0];
+
+	// Inserts 20 at the end
+	v.emplace_back(20);
+	n = v.size();
+	cout << "\nThe last element is: " << v[n - 1];
+
+	// erases the vector
+	v.clear();
+	cout << "\nVector size after erase(): " << v.size();
+
+	// two vector to perform swap
+	vector<int> v1, v2;
+	v1.push_back(1);
+	v1.push_back(2);
+	v2.push_back(3);
+	v2.push_back(4);
+
+	cout << "\n\nVector 1: ";
+	for (int i = 0; i < v1.size(); i++)
+		cout << v1[i] << " ";
+
+	cout << "\nVector 2: ";
+	for (int i = 0; i < v2.size(); i++)
+		cout << v2[i] << " ";
+
+	// Swaps v1 and v2
+	v1.swap(v2);
+
+	cout << "\nAfter Swap \nVector 1: ";
+	for (int i = 0; i < v1.size(); i++)
+		cout << v1[i] << " ";
+
+	cout << "\nVector 2: ";
+	for (int i = 0; i < v2.size(); i++)
+		cout << v2[i] << " ";
+}
+
+Output:
+The vector elements are: 10 10 10 10 10 
+The last element is: 15
+The vector elements are: 10 10 10 10 10 
+The first element is: 5
+The first element is: 10
+The first element is: 5
+The last element is: 20
+Vector size after erase(): 0
+
+Vector 1: 1 2 
+Vector 2: 3 4 
+After Swap 
+Vector 1: 3 4 
+Vector 2: 1 2
+
+
+
+
+
+
+
+
+All Vector Functions :
+
+vector::begin() and vector::end()
+vector rbegin() and rend()
+vector::cbegin() and vector::cend()
+vector::crend() and vector::crbegin()
+vector::assign()
+vector::at()
+vector::back()
+vector::capacity()
+vector::clear()
+vector::push_back()
+vector::pop_back()
+vector::empty()
+vector::erase()
+vector::size()
+vector::swap()
+vector::reserve()
+vector::resize()
+vector::shrink_to_fit()
+vector::operator=
+vector::operator[]
+vector::front()
+vector::data()
+vector::emplace_back()
+vector::emplace()
+vector::max_size()
+vector::insert()
+
+
+
+
+
+
+
+
+Youtube:
+
+#include <bits/stdc++.h>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    //Initiating Vector
+    vector <int> v;
+
+    //Inserting the values
+    for (int i = 1; i <= 5; i++)
+        v.push_back(i);
+
+    //Printing the Vector
+    cout << "The elements in the vector is:\n" << endl;
+    for (int i = 0; i <= 4; i++)
+        cout << v[i] << endl;
+
+    //Size, Capacity and Maximum size of the vector
+    cout << "Size:" << v.size() << endl;
+    cout << "Capacity:" << v.capacity() << endl;
+    cout << "Maximun Size:" << v.max_size() << endl;
+
+    //Check if the vector is empty or not empty
+    if (v.empty()) 
+        cout << "Vector is empty \n"<< endl;
+    else
+        cout << "Vector is not empty \n"<< endl;
+
+    //Print First, Lastr and i'th element
+    cout << "First:" << " " << v.front() << endl;
+    cout << "Last:" << " " << v.back() << endl;
+    cout << "Random such as third:" << "  " << v.at(3) << endl; // Here as an example we used 3'rd position but any position can be used
+
+return 0;
+
+
+
+int main()
+{
+    vector <int> v;
+    v.push_back(1); //Inserting values in a vector
+    v.push_back(2);
+    v.push_back(3);
+
+    for (int i = 0; i < v.size(); i++)
+        cout << v[i] << endl;
+        //Output 1, 2, 3
+    
+    vector <int>::iterator it;
+    for (it = v.begin(); it != v.end(); it++)
+        cout << *it << endl;
+    //Output 1, 2, 3
+
+    for (auto element : v) //Automatically chooses or identifies the data type of the elements in the vector
+        cout << element << endl; //Output 1, 2, 3
+    return 0;
+}
+
+
+//std::pair
+//PAIR "Two different data type variables can be stored"
+
+    int main()
+    {
+        pair <int, char> p;
+        
+        p.first = 3; // Acessiong the first i.e, 'int' type
+        p.second = 'f'; // Acessiong the second i.e, 'char' tyoe
+
+    return 0;
+    }
+
+
+
+Question:
+Reduce the given array:
+arr = {10, 16, 7, 14, 5, 3, 12, 9}
+
+Solution:
+#include <bits/stdc++.h>
+#include <vector>
+using namespace std;
+
+    bool myCompare(pair<int, int>p1, pair<int, int> p2)
+    {
+        return p1.first < p2.first;
+    }
+
+    int main()
+    {
+        int i;
+        int arr[] = {10, 16, 7, 14, 5, 3, 12, 9};
+        vector < pair<int, int> > v; 
+
+        for (i = 0; i < (sizeof(arr) / sizeof(arr[0])); i++)
+        {
+            v.push_back(make_pair(arr[i], i));
+        }
+
+        sort (v.begin(), v.end(), myCompare);
+        for (i = 0; i < v.size(); i++)
+            arr[v[i].second] = i;
+
+
+        for (i = 0; i < v.size(); i++)
+            cout << arr[i] << " ";
+
+        return 0;
+    }
