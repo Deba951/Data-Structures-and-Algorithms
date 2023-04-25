@@ -1,1 +1,0 @@
-int[] b=new int[arr.length];
