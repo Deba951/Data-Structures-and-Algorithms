@@ -1,0 +1,16 @@
+Begin
+   function dijkstra() to find minimum distance:
+   1) Create a set Set that keeps track of vertices included in shortest
+   path tree, Initially, the set is empty.
+   2) A distance value is assigned to all vertices in the input graph.
+   Initialize all distance values as INFINITE. Distance value is assigned as
+   0 for the source vertex so that it is picked first.
+   3) While Set doesn’t include all vertices
+      a) Pick a vertex u which is not there in the Set and has minimum distance value.
+      b) Include u to Set.
+      c) Distance value is updated of all adjacent vertices of u.
+      For updating the distance values, iterate through all adjacent
+      vertices. if sum of distance value of u (from source) and weight of
+      edge u-v for every adjacent vertex v, is less than the distance value
+      of v, then update the distance value of v.
+End

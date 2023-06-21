@@ -1,0 +1,17 @@
+function minimax(node, depth, maximizingPlayer):
+    if depth = 0 or node is a terminal node:
+        return the heuristic value of the node
+
+    if maximizingPlayer:
+        bestValue = -infinity
+        for each childNode in node's children:
+            value = minimax(childNode, depth - 1, false)
+            bestValue = max(bestValue, value)
+        return bestValue
+
+    else:  // minimizing player
+        bestValue = +infinity
+        for each childNode in node's children:
+            value = minimax(childNode, depth - 1, true)
+            bestValue = min(bestValue, value)
+        return bestValue

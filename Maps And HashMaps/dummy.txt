@@ -1,0 +1,27 @@
+Traverse all components
+------------------------
+for(auto i: range){
+    if(!visited[i])
+        travarsal(i);
+}
+
+
+
+BFS:
+------
+void bfs(int s){
+    queue<int> q;
+    q.push(s);
+    visited[s] = true;
+    while(!q.empty()){
+        int u = q.front();
+        q.pop();
+        for(auto v: adj[u]){
+            if(!visited[v]){
+                visited[v] = true;
+                q.push(v);
+            }
+        }
+    }
+}
+
