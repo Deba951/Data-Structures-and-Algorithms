@@ -1,0 +1,20 @@
+class Node{
+    int data;
+    Node left;
+    Node right;
+    
+    public Node(key){
+        data = key;
+        left = right = null;
+    }
+}
+
+main(){
+    Node root = new Node(1);
+    root.left = new Node(2);
+    root.right = new Node(3);
+    root.right.left = new Node(4);
+    // ....add more as required.
+}
+
+OUTPUT: 1, 2, 3, 4      (In Binary Tree format).

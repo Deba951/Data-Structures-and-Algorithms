@@ -1,0 +1,238 @@
+A tree data structure is a hierarchical structure that is used to represent and organize data in a way that is easy to navigate and search. It is a collection of nodes that are connected by edges and has a hierarchical relationship between the nodes. 
+
+The topmost node of the tree is called the root, and the nodes below it are called the child nodes. Each node can have multiple child nodes, and these child nodes can also have their own child nodes, forming a recursive structure.
+============================================================================================================================================
+
+
+Basic Terminologies In Tree Data Structure:
+--------------------------------------------
+    :> Parent Node: The node which is a predecessor of a node is called the parent node of that node. {B} is the parent node of {D, E}.
+
+    :> Child Node: The node which is the immediate successor of a node is called the child node of that node. Examples: {D, E} are the child nodes of {B}.
+
+    :> Root Node: The topmost node of a tree or the node which does not have any parent node is called the root node. {A} is the root node of the tree. A non-empty tree must contain exactly one root node and exactly one path from the root to all other nodes of the tree.
+
+    :> Leaf Node or External Node: The nodes which do not have any child nodes are called leaf nodes. {K, L, M, N, O, P} are the leaf nodes of the tree.
+
+    :> Ancestor of a Node: Any predecessor nodes on the path of the root to that node are called Ancestors of that node. {A,B} are the ancestor nodes of the node {E}
+
+    :> Descendant: Any successor node on the path from the leaf node to that node. {E,I} are the descendants of the node {B}.
+
+    :> Sibling: Children of the same parent node are called siblings. {D,E} are called siblings.
+    
+    :> Level of a node: The count of edges on the path from the root node to that node. The root node has level 0.
+
+    :> Internal node: A node with at least one child is called Internal Node.
+
+    :> Neighbour of a Node: Parent or child nodes of that node are called neighbors of that node.
+    
+    :> Subtree: Any node of the tree along with its descendant.
+
+    :> Degree of a Node: The number of children of a node is called the degree of that node. The degree of the node {B} is 2.
+
+============================================================================================================================================
+
+
+Representation of a Node in Tree Data Structure:
+-------------------------------------------------
+
+struct Node
+{
+   int data;
+   struct Node *first_child;
+   struct Node *second_child;
+   struct Node *third_child;
+   .
+   .
+   .
+   struct Node *nth_child;
+};
+
+============================================================================================================================================
+
+
+Basic Operation Of Tree Data Structure:
+----------------------------------------
+
+    :> Create – create a tree in the data structure.
+
+    :> Insert − Inserts data in a tree.
+
+    :> Search − Searches specific data in a tree to check whether it is present or not.
+
+    :> Delete – delete data from a tree.
+
+    :> Traversal:
+    -------------
+        :> Level Order traversal - Perform level by level traversing through all nodes starting with root node and then level 1 nodes and then level 2 nodes and so on.
+        :> Preorder Traversal – perform Traveling a tree in a pre-order manner in the data structure.
+
+        :> In order Traversal – perform Traveling a tree in an in-order manner.
+
+        :> Post-order Traversal –perform Traveling a tree in a post-order manner.
+
+
+============================================================================================================================================
+
+
+Why Tree is considered a non-linear data structure?
+----------------------------------------------------
+
+The data in a tree are not stored in a sequential manner i.e., they are not stored linearly. Instead, they are arranged on multiple levels or we can say it is a hierarchical structure. For this reason, the tree is considered to be a non-linear data structure.
+
+============================================================================================================================================
+
+Properties of Tree Data Structure:
+-----------------------------------
+
+
+    ;> Number of edges: An edge can be defined as the connection between two nodes. If a tree has N nodes then it will have (N-1) edges. There is only one path from each node to any other node of the tree.
+
+    ;> Depth of a node: The depth of a node is defined as the length of the path from the root to that node. Each edge adds 1 unit of length to the path. So, it can also be defined as the number of edges in the path from the root of the tree to the node.
+
+    ;> Height of a node: The height of a node can be defined as the length of the longest path from the node to a leaf node of the tree.
+
+    ;> Height of the Tree: The height of a tree is the length of the longest path from the root of the tree to a leaf node of the tree.
+
+    ;> Degree of a Node: The total count of subtrees attached to that node is called the degree of the node. The degree of a leaf node must be 0. The deg
+
+============================================================================================================================================
+
+
+Need for Tree Data Structure
+-----------------------------
+
+    1. One reason to use trees might be because you want to store information that naturally forms a hierarchy. For example, the file system on a computer.
+    
+    2. Trees (with some ordering e.g., BST) provide moderate access/search (quicker than Linked List and slower than arrays). 
+    
+    3. Trees provide moderate insertion/deletion (quicker than Arrays and slower than Unordered Linked Lists). 
+    
+    4. Like Linked Lists and unlike Arrays, Trees don’t have an upper limit on the number of nodes as nodes are linked using pointers.
+
+
+============================================================================================================================================
+
+
+Application of Tree Data Structure:
+------------------------------------
+    
+    :> File System:  This allows for efficient navigation and organization of files.
+    
+    :> Data Compression: Huffman coding is a popular technique for data compression that involves constructing a binary tree where the leaves represent characters and their frequency of occurrence. The resulting tree is used to encode the data in a way that minimizes the amount of storage required.
+    
+    :> Compiler Design: In compiler design, a syntax tree is used to represent the structure of a program. 
+    
+    :> Database Indexing: B-trees and other tree structures are used in database indexing to efficiently search for and retrieve data. 
+    
+    :> To learn more about the applications of Tree Data Structure, refer to this article.
+
+
+============================================================================================================================================
+
+
+Advantages of Tree Data Structure:
+-----------------------------------
+
+    
+    :> Tree offer Efficient Searching Depending on the type of tree, with average search times of O(log n) for balanced trees like AVL. 
+
+    :> Trees provide a hierarchical representation of data, making it easy to organize and navigate large amounts of information.
+
+    :> The recursive nature of trees makes them easy to traverse and manipulate using recursive algorithms.
+
+
+============================================================================================================================================
+
+
+Disadvantages of Tree Data Structure:
+--------------------------------------
+
+    
+    :> Unbalanced Trees, meaning that the height of the tree is skewed towards one side, which can lead to inefficient search times.
+    
+    :> Trees demand more memory space requirements than some other data structures like arrays and linked lists, especially if the tree is very large.
+    
+    :> The implementation and manipulation of trees can be complex and require a good understanding of the algorithms.
+
+
+============================================================================================================================================
+
+
+Types of Binary Tree
+----------------------
+
+There are four types of Binary tree:
+
+    Full/ proper/ strict Binary tree
+    Complete Binary tree
+    Perfect Binary tree
+    Degenerate Binary tree
+    Balanced Binary tree
+
+
+1. Full/ proper/ strict Binary tree
+-------------------------------------
+
+    The full binary tree is also known as a strict binary tree. The tree can only be considered as the full binary tree if each node must contain either 0 or 2 children. The full binary tree can also be defined as the tree in which each node must contain 2 children except the leaf nodes.
+
+    Properties of Full Binary Tree
+
+    The number of leaf nodes is equal to the number of internal nodes plus 1. In the above example, the number of internal nodes is 5; therefore, the number of leaf nodes is equal to 6.
+    The maximum number of nodes is the same as the number of nodes in the binary tree, i.e., 2h+1 -1.
+    The minimum number of nodes in the full binary tree is 2*h-1.
+    The minimum height of the full binary tree is log2(n+1) - 1.
+    The maximum height of the full binary tree can be computed as:
+    n= 2*h - 1
+
+    n+1 = 2*h
+
+    h = n+1/2
+
+
+2. Complete Binary Tree
+------------------------
+
+    The complete binary tree is a tree in which all the nodes are completely filled except the last level. In the last level, all the nodes must be as left as possible. In a complete binary tree, the nodes should be added from the left.
+
+    Properties of Complete Binary Tree
+
+    The maximum number of nodes in complete binary tree is 2h+1 - 1.
+    The minimum number of nodes in complete binary tree is 2h.
+    The minimum height of a complete binary tree is log2(n+1) - 1.
+    The maximum height of a complete binary tree is
+
+
+3. Perfect Binary Tree
+----------------------
+    A tree is a perfect binary tree if all the internal nodes have 2 children, and all the leaf nodes are at the same level.
+
+    Note: All the perfect binary trees are the complete binary trees as well as the full binary tree, but vice versa is not true, i.e., all complete binary trees and full binary trees are the perfect binary trees.
+
+
+4. Degenerate Binary Tree
+-------------------------
+    The degenerate binary tree is a tree in which all the internal nodes have only one children.
+
+
+5. Balanced Binary Tree
+-----------------------
+    The balanced binary tree is a tree in which both the left and right trees differ by atmost 1. For example, AVL and Red-Black trees are balanced binary tree.
+
+
+============================================================================================================================================
+
+
+
+
+
+Binary Tree Implementation
+---------------------------
+    A Binary tree is implemented with the help of pointers. The first node in the tree is represented by the root pointer. Each node in the tree consists of three parts, i.e., data, left pointer and right pointer. To create a binary tree, we first need to create the node. We will create the node of user-defined as shown below:
+
+    struct node{  
+        int data,  
+        struct node *left, *right;  
+    }  
+    
+    Where, data is the value, left pointer contains the address of the left node, and right pointer contains the address of the right node.
